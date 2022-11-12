@@ -5,38 +5,24 @@ import ItemContainer from "./components/ItemContainer";
 const App = () => {
   const cIds = ["container-1", "container-2", "container-3", "container-4"];
 
-  const [ items, setItems ] = useState<IItem[]>([]); 
-
   const [containers, setContainers] = useState<IContainer[]>([
     {
       id: cIds[0],
       type: cIds[0],
       accept: cIds.filter((id) => id !== cIds[0]),
-      items: [
-        { id: "red-1", title: "仕事" },
-        { id: "red-2", title: "仕事" },
-        { id: "green-3", title: "宿題" },
-      ],
+      items: [],
     },
     {
       id: cIds[1],
       type: cIds[1],
       accept: cIds.filter((id) => id !== cIds[1]),
-      items: [
-        { id: "red-4", title: "仕事" },
-        { id: "red-5", title: "趣味" },
-        { id: "green-6", title: "宿題" },
-      ],
+      items: [],
     },
     {
       id: cIds[2],
       type: cIds[2],
       accept: cIds.filter((id) => id !== cIds[2]),
-      items: [
-        { id: "green-7", title: "宿題" },
-        { id: "yellow-8", title: "趣味" },
-        { id: "yellow-9", title: "趣味" },
-      ],
+      items: [],
     },
     {
       id: cIds[3],
@@ -81,7 +67,7 @@ const App = () => {
   return (
     <>
       <Container>
-        <Headers heading="REACT DND MULTIPLE TARGET" />
+        <Headers heading="TODO管理アプリ" />
 
         <HStack justify="center">
           {containers.map((container) => (

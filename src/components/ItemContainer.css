@@ -14,7 +14,7 @@
 
 .modal-button {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
 }
 
 .modal-bottom-buttons {

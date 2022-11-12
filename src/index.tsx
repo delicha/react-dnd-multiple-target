@@ -3,6 +3,7 @@ import App from "./App";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { DndProvider } from "react-dnd";
 import { ChakraProvider, theme } from "@chakra-ui/react";
+import "./Index.css";
 
 ReactDOM.render(
   <DndProvider backend={HTML5Backend}>

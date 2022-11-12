@@ -1,9 +1,10 @@
 import { Stack } from "@chakra-ui/layout";
 import { AnimatePresence, motion } from "framer-motion";
-import { FC } from "react";
+import { useState, FC } from "react";
 import { useDrop } from "react-dnd";
 import Item from "./Item";
 import "./ItemContainer.css";
+import uuid from 'react-uuid';
 
 interface ItemContainerProps {
   items: IItem[];
@@ -31,6 +32,45 @@ const ItemContainer: FC<ItemContainerProps> = ({
       isOver: !!monitor.isOver(),
     }),
   });
+  const [title, setTitle] = useState("");
+  const [tags, setTags] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [showTagInput, setShowTagInput] = useState(false);
+
+  const ShowModal = () => {
+    setShowModal(true);
+  };
+  const closeModal = () => {
+    setShowModal(false);
+    setShowTagInput(false);
+  };
+  const ShowTagInput = () => {
+    setShowTagInput(true);
+  };
+
+  const onAddTask = () => {
+    if (!title) {
+      alert("タイトルを入力してください。");
+      return null;
+    }
+    const newTask = {
+      id: uuid(),
+      title: title,
+      tags:["宿題", "仕事"]
+    };
+    items.push(newTask);
+    setTitle("");
+  };
+
+  const onAddTag = () => {
+    if (!tags) {
+      return null;
+    }
+    const newTag = {
+      tags:tags,
+    };
+    // setTags([...tags, newTag]);
+  };
 
   return (
     <Stack
@@ -42,8 +82,8 @@ const ItemContainer: FC<ItemContainerProps> = ({
       bg={isOver ? "gray.100" : "gray.300"}
       align="center"
       justify="start"
-      boxShadow="xl"
       animate={{ width: isOver ? 320 : 300, y: isOver ? 0 : 0 }}
+      border="1px"
     >
       <AnimatePresence>
         {items.map((item, i) => (
@@ -53,28 +93,57 @@ const ItemContainer: FC<ItemContainerProps> = ({
             type={type}
             item={item}
             key={item.id}
-          >
-          </Item>
+          />
         ))}
       </AnimatePresence>
-      <button className="column-button">+</button>
-      <div className="modal-container">
-        <div>
-          <input 
-            id="title"
-            type="text"
-            className="modal-input"
-          />
+      <button className="column-button" onClick={ShowModal}>+</button>
+      {showModal ? (
+        <div className="modal-container">
+          <div>
+            <input 
+              id="title"
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="modal-input"
+            />
+          </div>
+          <div className="modal-button">
+            <button onClick={ShowTagInput}>+</button>
+          </div>
+          <div className="tag-input">
+          {showTagInput ? (
+            <div className="tag-container">
+              <div>
+                <input 
+                  id="tags"
+                  type="text"
+                  value={tags}
+                  // onChange={(e) => setTags(e.target.value)}
+                  className="modal-input"
+                />
+              </div>
+              <button onClick={onAddTag}>作成</button>
+              {/* {tags.map((tag) => ( */}
+                <p>宿題・仕事</p>
+              {/* ))} */}
+            </div>
+            ) : (
+              <>
+                <br />
+              </>
+            )
+          }
+          </div>
+          <div className="modal-bottom-buttons">
+            <button onClick={closeModal}>Cancel</button>
+            <button onClick={onAddTask}>OK</button>
+          </div>
         </div>
-        <div className="modal-button">
-          <button>+</button>
-        </div>
-
-        <div className="modal-bottom-buttons">
-          <button>Cancel</button>
-          <button>OK</button>
-        </div>
-      </div>
+        ) : (
+          <></>
+        )
+      }
     </Stack>
   );
 };

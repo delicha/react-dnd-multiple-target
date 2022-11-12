@@ -2,6 +2,8 @@ import { Box } from "@chakra-ui/layout";
 import { motion } from "framer-motion";
 import { FC } from "react";
 import { useDrag } from "react-dnd";
+import "./Item.css";
+
 interface ItemProps {
   item: IItem;
   type: string;
@@ -39,8 +41,17 @@ const Item: FC<ItemProps> = ({ item, type, index, onItemDrag }) => {
       bg="white"
       border="1px solid #000"
       opacity={isDragging ? 0.5 : 1}
+      display="flex"
+      justifyContent="center"
     >
-      <p color="white">{item.title}</p>
+      <div>
+        <div className="task-title">
+          <p>{item.title}</p>
+        </div>
+        <div className="task-tags">
+          <p>{item.tags?.join(" / ")}</p>
+        </div>
+      </div>
     </Box>
   );
 };
