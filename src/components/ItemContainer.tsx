@@ -2,7 +2,8 @@ import { Stack } from "@chakra-ui/layout";
 import { AnimatePresence, motion } from "framer-motion";
 import { FC } from "react";
 import { useDrop } from "react-dnd";
-import ColorItem from "./ColorItem";
+import Item from "./Item";
+import "./ItemContainer.css";
 
 interface ItemContainerProps {
   items: IItem[];
@@ -36,7 +37,7 @@ const ItemContainer: FC<ItemContainerProps> = ({
       as={motion.div}
       ref={itemsRef}
       minH="600px"
-      minW="200px"
+      minW="300px"
       spacing={0}
       bg={isOver ? "gray.100" : "gray.300"}
       align="center"
@@ -46,16 +47,34 @@ const ItemContainer: FC<ItemContainerProps> = ({
     >
       <AnimatePresence>
         {items.map((item, i) => (
-          <ColorItem
+          <Item
             index={i}
             onItemDrag={onItemDrag}
             type={type}
             item={item}
             key={item.id}
           >
-          </ColorItem>
+          </Item>
         ))}
       </AnimatePresence>
+      <button className="column-button">+</button>
+      <div className="modal-container">
+        <div>
+          <input 
+            id="title"
+            type="text"
+            className="modal-input"
+          />
+        </div>
+        <div className="modal-button">
+          <button>+</button>
+        </div>
+
+        <div className="modal-bottom-buttons">
+          <button>Cancel</button>
+          <button>OK</button>
+        </div>
+      </div>
     </Stack>
   );
 };
