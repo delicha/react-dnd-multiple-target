@@ -11,9 +11,9 @@ const App = () => {
       type: cIds[0],
       accept: cIds.filter((id) => id !== cIds[0]),
       items: [
-        { id: "red-1", color: "red" },
-        { id: "red-2", color: "red" },
-        { id: "green-3", color: "green" },
+        { id: "red-1", title: "赤" },
+        { id: "red-2", title: "赤" },
+        { id: "green-3", title: "緑" },
       ],
     },
     {
@@ -21,9 +21,9 @@ const App = () => {
       type: cIds[1],
       accept: cIds.filter((id) => id !== cIds[1]),
       items: [
-        { id: "red-4", color: "red" },
-        { id: "red-5", color: "yellow" },
-        { id: "green-6", color: "green" },
+        { id: "red-4", title: "赤" },
+        { id: "red-5", title: "黄" },
+        { id: "green-6", title: "緑" },
       ],
     },
     {
@@ -31,9 +31,9 @@ const App = () => {
       type: cIds[2],
       accept: cIds.filter((id) => id !== cIds[2]),
       items: [
-        { id: "green-7", color: "green" },
-        { id: "yellow-8", color: "yellow" },
-        { id: "yellow-9", color: "yellow" },
+        { id: "green-7", title: "緑" },
+        { id: "yellow-8", title: "黄" },
+        { id: "yellow-9", title: "黄" },
       ],
     },
     {
@@ -49,7 +49,7 @@ const App = () => {
     setContainerId(id);
   };
 
-  const onItemDrag = (item: { type: string; color: string; id: string }) => {
+  const onItemDrag = (item: { title: string; type: string; id: string }) => {
     // const droppedToContainer = containers.find((container) => {
     //   return container.type === containerId;
     // });

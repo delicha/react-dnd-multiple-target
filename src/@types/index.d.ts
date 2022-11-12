@@ -1,6 +1,6 @@
 declare interface IItem {
   id: string;
-  color: string;
+  title: string;
 }
 declare interface IContainer {
   id: string;

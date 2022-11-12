@@ -6,7 +6,7 @@ import ColorItem from "./ColorItem";
 
 interface ItemContainerProps {
   items: IItem[];
-  onItemDrag: (item: { color: string; id: string; type: string }) => void;
+  onItemDrag: (item: { title: string, id: string; type: string }) => void;
   type: string;
   id: string;
   accept: string[];
@@ -35,13 +35,14 @@ const ItemContainer: FC<ItemContainerProps> = ({
     <Stack
       as={motion.div}
       ref={itemsRef}
-      minH="300px"
+      minH="600px"
+      minW="200px"
       spacing={0}
-      bg={isOver ? "gray.300" : "gray.700"}
+      bg={isOver ? "gray.100" : "gray.300"}
       align="center"
-      justify="end"
+      justify="start"
       boxShadow="xl"
-      animate={{ width: isOver ? 120 : 100, y: isOver ? 0 : 20 }}
+      animate={{ width: isOver ? 320 : 300, y: isOver ? 0 : 0 }}
     >
       <AnimatePresence>
         {items.map((item, i) => (
@@ -51,7 +52,8 @@ const ItemContainer: FC<ItemContainerProps> = ({
             type={type}
             item={item}
             key={item.id}
-          />
+          >
+          </ColorItem>
         ))}
       </AnimatePresence>
     </Stack>

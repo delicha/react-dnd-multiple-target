@@ -6,7 +6,7 @@ interface ColorItemProps {
   item: IItem;
   type: string;
   index: number;
-  onItemDrag: (item: { color: string; id: string; type: string }) => void;
+  onItemDrag: (item: { title: string, id: string; type: string }) => void;
 }
 
 const ColorItem: FC<ColorItemProps> = ({ item, type, index, onItemDrag }) => {
@@ -16,7 +16,8 @@ const ColorItem: FC<ColorItemProps> = ({ item, type, index, onItemDrag }) => {
     end: (item, monitor) => {
       const dropResult = monitor.getDropResult();
 
-      if (item && dropResult && index === 0) {
+      // if (item && dropResult && index === 0) {
+        if (item && dropResult) {
         console.log(dropResult);
 
         onItemDrag({ ...item, type: type });
@@ -33,11 +34,14 @@ const ColorItem: FC<ColorItemProps> = ({ item, type, index, onItemDrag }) => {
       exit={{ opacity: 0, height: 0 }}
       as={motion.div}
       ref={dragRef}
-      boxSize="100px"
-      bg={item.color}
-      border="1px solid #ccc"
+      boxSize="200"
+      h='100px'
+      bg="white"
+      border="1px solid #000"
       opacity={isDragging ? 0.5 : 1}
-    />
+    >
+      <p color="white">{item.title}</p>
+    </Box>
   );
 };
 export default ColorItem;
