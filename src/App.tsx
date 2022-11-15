@@ -74,6 +74,7 @@ const App = () => {
             type={container.type}
             items={container.items}
             key={container.id}
+            containers={containers}
           />
         ))}
       </HStack>

@@ -13,6 +13,7 @@ interface ItemContainerProps {
   id: string;
   accept: string[];
   getContainerId: (id: string) => void;
+  containers: IContainer[];
 }
 
 const ItemContainer: FC<ItemContainerProps> = ({
@@ -22,6 +23,7 @@ const ItemContainer: FC<ItemContainerProps> = ({
   id,
   accept,
   getContainerId,
+  containers,
 }) => {
   const [{ isOver }, itemsRef] = useDrop({
     drop: () => {
@@ -40,12 +42,6 @@ const ItemContainer: FC<ItemContainerProps> = ({
   const [showModal, setShowModal] = useState(false);
   const [showTagInput, setShowTagInput] = useState(false);
 
-  // const filterTags = (e: any) => {
-  //   const search = e.toLowerCase();
-  //   const filterTags = TagData.filter(tags => tags.toLowerCase().includes(search));
-  //   setTags(filterTags);
-  // }
-
   const onChangeText = (e: ChangeEvent<HTMLInputElement>) =>{
     setText(e.target.value);
   }
@@ -55,6 +51,7 @@ const ItemContainer: FC<ItemContainerProps> = ({
   };
   const closeModal = () => {
     setTitle("");
+    setTags([]);
     setShowModal(false);
     setShowTagInput(false);
   };
@@ -86,9 +83,7 @@ const ItemContainer: FC<ItemContainerProps> = ({
     const newTags = [...tags];
     newTags.push(text);
     setTags(newTags);
-    console.log(tags);
     setShowTagInput(false);
-    
   };
 
   return (
@@ -135,15 +130,23 @@ const ItemContainer: FC<ItemContainerProps> = ({
               <input 
                 id="createdTag"
                 type="text"
-                // value={tags}
-                // onChange={(e) => filterTags(e.target.value)}
                 onChange={onChangeText}
                 className="modal-input"
               />
               <ul>
-                {tags.map((tag, i) => {
-                  return <li key={i}><button>{tag}</button></li>
-                })}
+                 {containers.map((container) => (
+                    container.items.map((item) => (
+                      item.tags?.map((tag:any, i:any) => {
+                        return (
+                          <li key={i}>
+                            <button onClick={onAddTag}>
+                              {tag}
+                            </button>
+                          </li>
+                        )
+                      })
+                    ))
+                  ))}
               </ul>
               <button className="task-create-button" onClick={onAddTag}>作成</button>
             </div>
