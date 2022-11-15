@@ -90,7 +90,7 @@ const ItemContainer: FC<ItemContainerProps> = ({
     <Stack
       as={motion.div}
       ref={itemsRef}
-      minH="600px"
+      height="600px"
       minW="300px"
       spacing={0}
       bg={isOver ? "gray.100" : "gray.300"}
@@ -98,6 +98,8 @@ const ItemContainer: FC<ItemContainerProps> = ({
       justify="start"
       animate={{ width: isOver ? 320 : 300, y: isOver ? 0 : 0 }}
       border="1px"
+      overflowY="auto"
+      overflowX="hidden"
     >
       <AnimatePresence>
         {items.map((item, i) => (

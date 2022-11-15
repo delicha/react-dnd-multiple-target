@@ -12,19 +12,28 @@ const App = () => {
       id: cIds[0],
       type: cIds[0],
       accept: cIds.filter((id) => id !== cIds[0]),
-      items: [],
+      items: [ 
+        { id: "1", title: "課題アプリ作成", tags: ["仕事", "趣味"] },
+        { id: "2", title: "企業に応募", tags: ["転職"] },
+      ],
     },
     {
       id: cIds[1],
       type: cIds[1],
       accept: cIds.filter((id) => id !== cIds[1]),
-      items: [],
+      items: [
+        { id: "3", title: "UdemyでReact勉強", tags: ["React", "Udemy"] },
+      ],
     },
     {
       id: cIds[2],
       type: cIds[2],
       accept: cIds.filter((id) => id !== cIds[2]),
-      items: [],
+      items: [
+        { id: "4", title: "TechpitでSPAの勉強", tags: ["SPA", "Techpit"] },
+        { id: "5", title: "テーブル定義", tags: ["仕事"] },
+        { id: "6", title: "要件定義", tags: ["仕事"] },
+      ],
     },
     {
       id: cIds[3],
