@@ -1,0 +1,14 @@
+.header-container {
+  background-color: antiquewhite;
+  display: flex;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.header-title {
+  padding: 8px 50px;
+  margin: 20px;
+  border: 1px solid black;
+  background-color: white;
+}

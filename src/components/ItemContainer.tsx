@@ -1,6 +1,6 @@
 import { Stack } from "@chakra-ui/layout";
 import { AnimatePresence, motion } from "framer-motion";
-import { useState, FC } from "react";
+import { useState, FC, ChangeEvent } from "react";
 import { useDrop } from "react-dnd";
 import Item from "./Item";
 import "./ItemContainer.css";
@@ -32,15 +32,29 @@ const ItemContainer: FC<ItemContainerProps> = ({
       isOver: !!monitor.isOver(),
     }),
   });
-  const [title, setTitle] = useState("");
-  const [tags, setTags] = useState([]);
+
+  const [title, setTitle] = useState<string>("");
+  const [text, setText] = useState<string>("");
+  const [tags, setTags] = useState<string[]>([]);
+  
   const [showModal, setShowModal] = useState(false);
   const [showTagInput, setShowTagInput] = useState(false);
+
+  // const filterTags = (e: any) => {
+  //   const search = e.toLowerCase();
+  //   const filterTags = TagData.filter(tags => tags.toLowerCase().includes(search));
+  //   setTags(filterTags);
+  // }
+
+  const onChangeText = (e: ChangeEvent<HTMLInputElement>) =>{
+    setText(e.target.value);
+  }
 
   const ShowModal = () => {
     setShowModal(true);
   };
   const closeModal = () => {
+    setTitle("");
     setShowModal(false);
     setShowTagInput(false);
   };
@@ -56,20 +70,25 @@ const ItemContainer: FC<ItemContainerProps> = ({
     const newTask = {
       id: uuid(),
       title: title,
-      tags:["宿題", "仕事"]
+      tags:tags,
     };
     items.push(newTask);
     setTitle("");
+    setTags([]);
+    setShowModal(false);
+    setShowTagInput(false);
   };
 
   const onAddTag = () => {
-    if (!tags) {
+    if (!text) {
       return null;
     }
-    const newTag = {
-      tags:tags,
-    };
-    // setTags([...tags, newTag]);
+    const newTags = [...tags];
+    newTags.push(text);
+    setTags(newTags);
+    console.log(tags);
+    setShowTagInput(false);
+    
   };
 
   return (
@@ -99,34 +118,34 @@ const ItemContainer: FC<ItemContainerProps> = ({
       <button className="column-button" onClick={ShowModal}>+</button>
       {showModal ? (
         <div className="modal-container">
-          <div>
-            <input 
-              id="title"
-              type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              className="modal-input"
-            />
-          </div>
+          <input 
+            id="title"
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            className="modal-input"
+          />
           <div className="modal-button">
             <button onClick={ShowTagInput}>+</button>
           </div>
           <div className="tag-input">
+            <div className="tag-created">{tags?.join(" / ")}</div>
           {showTagInput ? (
             <div className="tag-container">
-              <div>
-                <input 
-                  id="tags"
-                  type="text"
-                  value={tags}
-                  // onChange={(e) => setTags(e.target.value)}
-                  className="modal-input"
-                />
-              </div>
-              <button onClick={onAddTag}>作成</button>
-              {/* {tags.map((tag) => ( */}
-                <p>宿題・仕事</p>
-              {/* ))} */}
+              <input 
+                id="createdTag"
+                type="text"
+                // value={tags}
+                // onChange={(e) => filterTags(e.target.value)}
+                onChange={onChangeText}
+                className="modal-input"
+              />
+              <ul>
+                {tags.map((tag, i) => {
+                  return <li key={i}><button>{tag}</button></li>
+                })}
+              </ul>
+              <button className="task-create-button" onClick={onAddTag}>作成</button>
             </div>
             ) : (
               <>

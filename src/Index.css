@@ -1,1 +1,5 @@
-
+:root {
+  min-width: 1300px;
+  min-height: 800px;
+  background-color: antiquewhite;
+}

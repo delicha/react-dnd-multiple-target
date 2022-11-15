@@ -1,5 +1,5 @@
-import { Box, Flex, Heading } from "@chakra-ui/layout";
 import { FC } from "react";
+import "./Headers.css";
 
 interface HeadersProps {
   heading: string;
@@ -7,13 +7,11 @@ interface HeadersProps {
 
 const Headers: FC<HeadersProps> = ({ heading }) => {
   return (
-    <Flex justify="center" my="4">
-      <Box bg="black" px="4" py="2" borderRadius="sm">
-        <Heading color="white" fontSize="xl" as="h1">
-          {heading}
-        </Heading>
-      </Box>
-    </Flex>
+    <div className="header-container">
+      <div className="header-title">
+        {heading}
+      </div>
+    </div>
   );
 };
 export default Headers;

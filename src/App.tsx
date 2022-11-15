@@ -1,7 +1,9 @@
-import { Container, HStack } from "@chakra-ui/layout";
+import { HStack } from "@chakra-ui/layout";
 import { useState } from "react";
 import Headers from "./components/Headers";
 import ItemContainer from "./components/ItemContainer";
+import SearchFilter from "./components/SearchFilter";
+
 const App = () => {
   const cIds = ["container-1", "container-2", "container-3", "container-4"];
 
@@ -38,12 +40,6 @@ const App = () => {
   };
 
   const onItemDrag = (item: { title: string; type: string; id: string }) => {
-    // const droppedToContainer = containers.find((container) => {
-    //   return container.type === containerId;
-    // });
-    // const draggedFromContainer = containers.find((container) => {
-    //   return container.type === item.type;
-    // });
 
     setContainers((prev) => {
       return prev.map((container) => {
@@ -66,23 +62,21 @@ const App = () => {
 
   return (
     <>
-      <Container>
-        <Headers heading="TODO管理アプリ" />
-
-        <HStack justify="center">
-          {containers.map((container) => (
-            <ItemContainer
-              getContainerId={getContainerId}
-              accept={container.accept}
-              id={container.id}
-              onItemDrag={onItemDrag}
-              type={container.type}
-              items={container.items}
-              key={container.id}
-            />
-          ))}
-        </HStack>
-      </Container>
+      <Headers heading="TODO管理アプリ" />
+      <SearchFilter />
+      <HStack justify="center" bg="antiquewhite">
+        {containers.map((container) => (
+          <ItemContainer
+            getContainerId={getContainerId}
+            accept={container.accept}
+            id={container.id}
+            onItemDrag={onItemDrag}
+            type={container.type}
+            items={container.items}
+            key={container.id}
+          />
+        ))}
+      </HStack>
     </>
   );
 };

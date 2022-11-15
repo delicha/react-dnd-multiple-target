@@ -36,7 +36,55 @@
   border: 1px solid black;
 }
 
+.column-button:hover {
+  background-color: darkred;
+}
+
 .modal-bottom-buttons button {
   font-size: 15px;
   padding: 5px 20px;
+}
+
+.modal-bottom-buttons button:hover {
+  background-color: coral;
+}
+
+.modal-input {
+  border: 1px solid black;
+  background-color: khaki;
+}
+
+.tag-container {
+  border: 1px solid black;
+}
+
+.tag-container ul {
+  border-top: 1px solid black;
+}
+
+.tag-container li {
+  border-bottom: 1px solid black;
+  padding: 2px;
+  list-style: none;
+}
+.tag-container li:hover {
+  background-color: antiquewhite;
+}
+
+.task-create-button {
+  width: 100%;
+  display: block;
+  padding: 5px 20px;
+  background-color: lavenderblush;
+}
+
+.task-create-button:hover {
+  background-color: coral;
+}
+
+.tag-created {
+  font-size: small;
+  border-radius: 10%;
+  color: grey;
+  padding: 2px;
 }
