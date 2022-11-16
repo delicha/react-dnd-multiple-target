@@ -86,6 +86,15 @@ const ItemContainer: FC<ItemContainerProps> = ({
     setShowTagInput(false);
   };
 
+  const onAddTagFromList = (e: any) => {
+    console.log(e.currentTarget.getAttribute("data-item"));
+    const tagtext = e.currentTarget.getAttribute("data-item");
+    const newTags = [...tags];
+    newTags.push(tagtext);
+    setTags(newTags);
+    setShowTagInput(false);
+  };
+
   return (
     <Stack
       as={motion.div}
@@ -138,12 +147,10 @@ const ItemContainer: FC<ItemContainerProps> = ({
               <ul>
                  {containers.map((container) => (
                     container.items.map((item) => (
-                      item.tags?.map((tag:any, i:any) => {
+                      item.tags?.map((tag:string, i:number) => {
                         return (
-                          <li key={i}>
-                            <button onClick={onAddTag}>
+                          <li onClick={onAddTagFromList} key={tag} data-item={tag}>
                               {tag}
-                            </button>
                           </li>
                         )
                       })
