@@ -22,7 +22,7 @@ const App = () => {
       type: cIds[1],
       accept: cIds.filter((id) => id !== cIds[1]),
       items: [
-        { id: "3", title: "UdemyでReact勉強", tags: ["React", "Udemy"] },
+        { id: "3", title: "★★★★★★★★★★★★★★★★★★★★　UdemyでReact勉強　★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★", tags: ["React", "Udemy"] },
       ],
     },
     {
@@ -72,7 +72,9 @@ const App = () => {
   return (
     <>
       <Headers heading="TODO管理アプリ" />
-      <SearchFilter />
+      <SearchFilter 
+        containers={containers}
+      />
       <HStack justify="center" bg="antiquewhite">
         {containers.map((container) => (
           <ItemContainer
