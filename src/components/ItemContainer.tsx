@@ -35,6 +35,10 @@ const ItemContainer: FC<ItemContainerProps> = ({
     }),
   });
 
+  // const TagData: {
+  //   name: string;
+  // }[] = [];
+
   const [title, setTitle] = useState<string>("");
   const [text, setText] = useState<string>("");
   const [tags, setTags] = useState<string[]>([]);
@@ -84,6 +88,9 @@ const ItemContainer: FC<ItemContainerProps> = ({
     newTags.push(text);
     setTags(newTags);
     setShowTagInput(false);
+    // let name = {name: text};
+    // TagData.push(name);
+    // console.log(TagData);
   };
 
   const onAddTagFromList = (e: any) => {

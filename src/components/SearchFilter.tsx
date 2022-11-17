@@ -11,27 +11,35 @@ const SearchFilter: FC<SearchFilterProps> = (
   }
   ) => {
 
-  const TagData = [
-    {id: "1", name: "tag1"},
-    {id: "2", name: "tag2"},
-    {id: "3", name: "tag3"},
-    {id: "4", name: "tag4"},
-    {id: "5", name: "tag5"},
-    {id: "6", name: "tag6"},
-    {id: "7", name: "tag7"},
+  const tagListAll = async () => {
+    return (containers.map((container) => (
+      container.items.map((item) => (
+        item.tags?.map((tag:string, i:number) => {
+          TagData.push({name:tag})
+          // console.log(TagData);
+        })
+      ))
+    )))
+  }
+
+  const TagData: {
+    name: string;
+  }[] = [
+    // {name: "tag1"},
+    // {name: "tag2"},
+    // {name: "tag3"},
+    // {name: "tag4"},
+    // {name: "tag5"},
+    // {name: "tag6"},
+    // {name: "tag7"},
   ]
 
   const [tags, setTags] = useState(TagData);
 
-  const filterTags = (e: any) => {
-    const search = e.toLowerCase();
-    const filterTags = TagData.filter(tags => tags.name.toLowerCase().includes(search));
-    setTags(filterTags);
-  }
-
   const [showTagFilter, setShowTagFilter] = useState(false);
 
-  const ShowTagFilter = () => {
+  const ShowTagFilter = async () => {
+    await tagListAll();
     setShowTagFilter(true);
   };
 
@@ -45,7 +53,16 @@ const SearchFilter: FC<SearchFilterProps> = (
     const newTags = [...tags];
     newTags.push(tagtext);
     setTags(newTags);
+    // let name = {name: tagtext};
+    // TagData.push(name);
   };
+
+  const filterTags = (e: any) => {
+    const search = e.toLowerCase();
+    const filterTags = TagData.filter(tags => tags.name.toLowerCase().includes(search));
+    setTags(filterTags);
+    console.log(TagData);
+  }
 
   return (
     <div className="search-filter-container">
@@ -61,17 +78,18 @@ const SearchFilter: FC<SearchFilterProps> = (
                 className="search-filter-input"
               />
               <ul>
-                {/* {containers.map((container) => (
+                {containers.map((container) => (
                     container.items.map((item) => (
                       item.tags?.map((tag:string, i:number) => {
-                        return (
-                          <li onClick={onAddTagFromList} key={i} data-item={tag}>
-                              {tag}
-                          </li>
-                        )
+                        TagData.push({name: tag});
+                        // return (
+                        //   <li onClick={onAddTagFromList} key={i} data-item={tag}>
+                        //     {tag}
+                        //   </li>
+                        // )
                       })
                     ))
-                  ))} */}
+                  ))}
                 {tags.map((tag, i)=> {
                   return (
                     <li onClick={onAddTagFromList} key={i} data-item={tag.name}>
