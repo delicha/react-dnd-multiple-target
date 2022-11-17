@@ -88,18 +88,26 @@ const ItemContainer: FC<ItemContainerProps> = ({
     newTags.push(text);
     setTags(newTags);
     setShowTagInput(false);
-    // let name = {name: text};
-    // TagData.push(name);
-    // console.log(TagData);
   };
 
   const onAddTagFromList = (e: any) => {
-    console.log(e.currentTarget.getAttribute("data-item"));
-    const tagtext = e.currentTarget.getAttribute("data-item");
-    const newTags = [...tags];
-    newTags.push(tagtext);
-    setTags(newTags);
+    const tagtext = e.currentTarget.dataset.item;;
+    setTags([...tags, tagtext]);
     setShowTagInput(false);
+  };
+
+  const tagList = () => {
+    return (containers.map((container) => (
+      container.items.map((item) => {
+        return (item.tags?.map((tag:string, i:number) => {
+          return (
+            <li onClick={onAddTagFromList} key={i} data-item={tag}>
+              {tag}
+            </li>
+          )
+        })
+      )})
+    )))
   };
 
   return (
@@ -152,17 +160,7 @@ const ItemContainer: FC<ItemContainerProps> = ({
                 className="modal-input"
               />
               <ul>
-                 {containers.map((container) => (
-                    container.items.map((item) => (
-                      item.tags?.map((tag:string, i:number) => {
-                        return (
-                          <li onClick={onAddTagFromList} key={tag} data-item={tag}>
-                              {tag}
-                          </li>
-                        )
-                      })
-                    ))
-                  ))}
+                 {tagList()}
               </ul>
               <button className="task-create-button" onClick={onAddTag}>作成</button>
             </div>

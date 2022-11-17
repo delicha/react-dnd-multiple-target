@@ -11,13 +11,12 @@ const SearchFilter: FC<SearchFilterProps> = (
   }
   ) => {
 
-  const tagListAll = async () => {
+  const tagListAll = () => {
     return (containers.map((container) => (
       container.items.map((item) => (
-        item.tags?.map((tag:string, i:number) => {
+        item.tags?.map((tag:string, i:number) => (
           TagData.push({name:tag})
-          // console.log(TagData);
-        })
+        ))
       ))
     )))
   }
@@ -38,8 +37,8 @@ const SearchFilter: FC<SearchFilterProps> = (
 
   const [showTagFilter, setShowTagFilter] = useState(false);
 
-  const ShowTagFilter = async () => {
-    await tagListAll();
+  const ShowTagFilter = () => {
+    tagListAll();
     setShowTagFilter(true);
   };
 
@@ -48,20 +47,14 @@ const SearchFilter: FC<SearchFilterProps> = (
   };
 
   const onAddTagFromList = (e: any) => {
-    console.log(e.currentTarget.getAttribute("data-item"));
-    const tagtext = e.currentTarget.getAttribute("data-item");
-    const newTags = [...tags];
-    newTags.push(tagtext);
-    setTags(newTags);
-    // let name = {name: tagtext};
-    // TagData.push(name);
+    const tagtext = e.currentTarget.dataset.item;
+    setTags([...tags, tagtext]);
   };
 
   const filterTags = (e: any) => {
     const search = e.toLowerCase();
     const filterTags = TagData.filter(tags => tags.name.toLowerCase().includes(search));
     setTags(filterTags);
-    console.log(TagData);
   }
 
   return (
@@ -70,7 +63,7 @@ const SearchFilter: FC<SearchFilterProps> = (
         <button className="search-filter-button" onClick={ShowTagFilter}>タグで検索する</button>
         {showTagFilter ? (
             <>
-              <div className="tag-created">{tags?.join(" / ")}</div>
+              {/* <div className="tag-created">{tags?.join(" / ")}</div> */}
               <input 
                 id="tags"
                 type="text"
@@ -78,18 +71,7 @@ const SearchFilter: FC<SearchFilterProps> = (
                 className="search-filter-input"
               />
               <ul>
-                {containers.map((container) => (
-                    container.items.map((item) => (
-                      item.tags?.map((tag:string, i:number) => {
-                        TagData.push({name: tag});
-                        // return (
-                        //   <li onClick={onAddTagFromList} key={i} data-item={tag}>
-                        //     {tag}
-                        //   </li>
-                        // )
-                      })
-                    ))
-                  ))}
+                {tagListAll()}
                 {tags.map((tag, i)=> {
                   return (
                     <li onClick={onAddTagFromList} key={i} data-item={tag.name}>
