@@ -65,16 +65,16 @@ const SearchFilter: FC<SearchFilterProps> = (
                     container.items.map((item) => (
                       item.tags?.map((tag:string, i:number) => {
                         return (
-                          <li onClick={onAddTagFromList} key={tag} data-item={tag}>
+                          <li onClick={onAddTagFromList} key={i} data-item={tag}>
                               {tag}
                           </li>
                         )
                       })
                     ))
                   ))} */}
-                {tags.map(tag => {
+                {tags.map((tag, i)=> {
                   return (
-                    <li onClick={onAddTagFromList} data-item={tag.name}>
+                    <li onClick={onAddTagFromList} key={i} data-item={tag.name}>
                       {tag.name}
                     </li>
                   )
