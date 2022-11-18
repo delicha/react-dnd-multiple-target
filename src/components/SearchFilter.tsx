@@ -14,7 +14,7 @@ const SearchFilter: FC<SearchFilterProps> = (
   const tagListAll = () => {
     return (containers.map((container) => (
       container.items.map((item) => (
-        item.tags?.map((tag:string, i:number) => (
+        item.tags?.map((tag:string) => (
           TagData.push({name:tag})
         ))
       ))
@@ -63,7 +63,7 @@ const SearchFilter: FC<SearchFilterProps> = (
         <button className="search-filter-button" onClick={ShowTagFilter}>タグで検索する</button>
         {showTagFilter ? (
             <>
-              {/* <div className="tag-created">{tags?.join(" / ")}</div> */}
+              <div className="tag-created">{tags?.join(" / ")}</div>
               <input 
                 id="tags"
                 type="text"

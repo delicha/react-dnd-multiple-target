@@ -49,3 +49,9 @@
 .search-filter-button:hover {
   background-color: coral;
 }
+
+.tag-created {
+  font-size: small;
+  color: grey;
+  padding: 2px;
+}

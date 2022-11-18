@@ -91,7 +91,7 @@ const ItemContainer: FC<ItemContainerProps> = ({
   };
 
   const onAddTagFromList = (e: any) => {
-    const tagtext = e.currentTarget.dataset.item;;
+    const tagtext = e.currentTarget.dataset.item;
     setTags([...tags, tagtext]);
     setShowTagInput(false);
   };
